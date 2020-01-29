@@ -1,11 +1,12 @@
-import React, { useState, CreateContext } from 'react'
+import React, { useState, createContext } from 'react'
 import uuid from 'uuid/v1'
+
 export const BookContext = createContext();
 
 const BookContextProvider = (props) => {
     const [books, setBooks] = useState([
-        {title: 'Neuromancer', id: 1},
-        {title: 'Molly Milennium', id: 2}
+        {title: 'Neuromancer', author: 'William Gibson', id: 1},
+        {title: 'Molly Milennium', author: 'William Gibson', id: 2}
     ])
 
     const addBook = (title, author) => {
@@ -16,7 +17,7 @@ const BookContextProvider = (props) => {
         setBooks([books.filter(book => book.id !== id)])
     };
     return (
-        <BookContext.Provider value={books, addBook, removeBook}>
+        <BookContext.Provider value={{books, addBook, removeBook}}>
             { props.children }
         </BookContext.Provider>
     )
